@@ -10,10 +10,6 @@ namespace ProductsLearning.Data.Helpers
 {
      internal static class CollectionHelpers<T> where T : IEntity
     {
-        internal static IMongoCollection<T> GetCollection()
-        {
-            return GetCollectionFromConnectionString(Constants.CONN_STR);
-        }
 
         /// <summary>
         /// Creates and returns a MongoCollection from the specified type and connectionstring.
@@ -69,10 +65,9 @@ namespace ProductsLearning.Data.Helpers
         /// <returns>Returns the collection name for T.</returns>
         private static string GetCollectionName()
         {
-            string collectionName;
-            collectionName = typeof(T).GetTypeInfo().BaseType == typeof(object) ?
-                                      GetCollectionNameFromInterface() :
-                                      GetCollectionNameFromType();
+            var collectionName = typeof(T).GetTypeInfo().BaseType == typeof(object) ?
+                GetCollectionNameFromInterface() :
+                GetCollectionNameFromType();
 
             if (string.IsNullOrEmpty(collectionName))
             {

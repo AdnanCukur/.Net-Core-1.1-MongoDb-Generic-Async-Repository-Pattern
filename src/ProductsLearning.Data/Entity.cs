@@ -18,13 +18,7 @@ namespace ProductsLearning.Data
         /// <summary>
         /// create date
         /// </summary>
-        public DateTime CreatedOn
-        {
-            get
-            {
-                return ObjectId.CreationTime;
-            }
-        }
+        public DateTime CreatedOn => ObjectId.CreationTime;
 
         /// <summary>
         /// id in string format

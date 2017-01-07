@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using ProductsLearning.Data.Models;
-using ProductsLearning.Data;
 using ProductsLearning.Data.Repository;
 
 namespace ProductsLearning.Controllers
@@ -21,8 +20,6 @@ namespace ProductsLearning.Controllers
         [HttpGet]
         public async Task<IEnumerable<string>> Get()
         {
-
-            _productRepository
 
             //var allProducts = _productRepository.ToList();
             return new string[] { "value1", "value2" };

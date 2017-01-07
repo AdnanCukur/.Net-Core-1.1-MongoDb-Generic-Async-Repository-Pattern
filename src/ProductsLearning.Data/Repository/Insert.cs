@@ -1,17 +1,61 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Linq;
-using MongoDB.Driver;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace ProductsLearning.Data
+namespace ProductsLearning.Data.Repository
 {
     public partial class Repository<T> where T : IEntity
     {
-        public string MyMan()
+        #region Insert
+
+        /// <summary>
+        /// insert entity
+        /// </summary>
+        /// <param name="entity">entity</param>
+        public virtual void Insert(T entity)
         {
-            return "Heej";
+            Retry(() =>
+            {
+                Collection.InsertOne(entity);
+                return true;
+            });
         }
+        /// <summary>
+        /// insert entity
+        /// </summary>
+        /// <param name="entity">entity</param>
+        public virtual async Task InsertAsync(T entity)
+        {
+            await Retry(async () =>
+            {
+                await Collection.InsertOneAsync(entity);
+                return true;
+            });
+        }
+        /// <summary>
+        /// insert entity collection
+        /// </summary>
+        /// <param name="entities">collection of entities</param>
+        public virtual void Insert(IEnumerable<T> entities)
+        {
+            
+            Retry(() =>
+            {
+                Collection.InsertMany(entities);
+                return true;
+            });
+        }
+        /// <summary>
+        /// insert entity collection
+        /// </summary>
+        /// <param name="entities">collection of entities</param>
+        public virtual async Task InsertAsync(IEnumerable<T> entities)
+        {
+            await Retry(async () =>
+            {
+                await Collection.InsertManyAsync(entities);
+                return true;
+            });
+        }
+        #endregion Insert
     }
 }

@@ -7,7 +7,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace ProductsLearning.Data.Models
 {
-    public class Order
+    public class Order : Entity
     {
         [BsonElement("Products")]
         public List<Product> Products { get; set; }
