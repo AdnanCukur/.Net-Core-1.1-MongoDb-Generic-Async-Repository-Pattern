@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ProductsLearning.Data.Models;
+using ProductsLearning.Data.Repository;
 
 namespace ProductsLearning
 {
@@ -28,6 +30,8 @@ namespace ProductsLearning
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddTransient<IRepository<Person>,Repository<Person>>();
+            services.AddTransient<IRepository<Order>,Repository<Order>>();
             services.AddMvc();
         }
 

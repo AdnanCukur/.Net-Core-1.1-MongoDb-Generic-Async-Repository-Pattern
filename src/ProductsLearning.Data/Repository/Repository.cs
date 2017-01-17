@@ -18,15 +18,15 @@ namespace ProductsLearning.Data.Repository
     public partial class Repository<T> : IRepository<T>
         where T : IEntity
     {
-        #region MongoSpecific
+        private readonly string ConnectionString = "mongodb://localhost:27017/myMongoRepo";
 
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="connectionString">connection string</param>
-        public Repository(string connectionString)
+        public Repository()
         {
-            Collection = CollectionHelpers<T>.GetCollectionFromConnectionString(connectionString);
+            Collection = CollectionHelpers<T>.GetCollectionFromConnectionString(ConnectionString);
         }
 
         /// <summary>
@@ -58,7 +58,6 @@ namespace ProductsLearning.Data.Repository
             return Collection.Find(Filter.Empty);
         }
 
-        #endregion MongoSpecific
 
 
         #region Simplicity

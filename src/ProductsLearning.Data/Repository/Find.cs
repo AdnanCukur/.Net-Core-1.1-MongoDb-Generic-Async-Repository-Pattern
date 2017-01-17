@@ -124,10 +124,7 @@ namespace ProductsLearning.Data.Repository
         /// <returns>collection of entity</returns>
         public virtual IEnumerable<T> FindAll()
         {
-            return Retry(() =>
-            {
-                return Query().ToList();
-            });
+            return Retry(() => Query().ToList());
         }
         /// <summary>
         /// fetch all items in collection

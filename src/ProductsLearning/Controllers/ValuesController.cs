@@ -14,13 +14,18 @@ namespace ProductsLearning.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        private static readonly Repository<Product> _productRepository = new Repository<Product>("mongodb://localhost:27017/adoshop");
-        private static readonly Repository<Person> _personRepository = new Repository<Person>("mongodb://localhost:27017/adoshop");
+        private IRepository<Person> _personRepository;
+
+        public ValuesController(IRepository<Person> personRepository)
+        {
+            _personRepository = personRepository;
+           
+        }
         // GET api/values
         [HttpGet]
         public async Task<IEnumerable<string>> Get()
         {
-
+            var allPeople = _personRepository.FindAll();
             //var allProducts = _productRepository.ToList();
             return new string[] { "value1", "value2" };
         }

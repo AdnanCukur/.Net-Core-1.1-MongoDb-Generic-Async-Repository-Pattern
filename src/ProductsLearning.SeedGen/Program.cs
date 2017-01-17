@@ -13,7 +13,7 @@ namespace ProductsLearning.SeedGen
 {
     public class Program
     {
-        private static readonly Repository<Person> _personRepository = new Repository<Person>("mongodb://localhost:27017/adoshop");
+        private static readonly Repository<Person> _personRepository = new Repository<Person>();
 
         public static void Main(string[] args)
         {
