@@ -19,7 +19,7 @@ namespace ProductsLearning.Controllers
         public ValuesController(IRepository<Person> personRepository)
         {
             _personRepository = personRepository;
-           
+            List<Person> pelles =_personRepository.Find(x => x.Firstname == "pelle").ToList();
         }
         // GET api/values
         [HttpGet]
@@ -30,6 +30,11 @@ namespace ProductsLearning.Controllers
             return new string[] { "value1", "value2" };
         }
 
+        public async Task<IEnumerable<Person>> SomethingAsync()
+        {
+            var customers = await _personRepository.FindAsync(x => x.Orders.Count > 0);
+            return customers;
+        }
         private List<Product> getProductSeedData()
         {
             var seed = new List<Product>();
